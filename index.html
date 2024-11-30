@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Vectory</title>
+	<link rel="stylesheet" href="CSS/canvasSetup.css">
+	<link rel="stylesheet" href="CSS/pageSetup.css">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=999.0, user-scalable=yes">
+</head>
+
+<body>
+	<div id="canvasContainer">
+		<canvas id="canvasElement"></canvas>
+		<input type="text" class="inputField" id="pageConsole" placeholder="console">
+	</div>
+
+	<script type="module" src="version.js"></script>
+
+	<script>
+		const canvasElementHTML = document.getElementById("canvasElement");
+		const context = canvasElementHTML.getContext("2d");
+
+		function loadScript(src) {
+			return new Promise((resolve, reject) => {
+				const script = document.createElement("script");
+				script.type = "module";
+				script.src = src;
+				script.onload = resolve;
+				script.onerror = reject;
+				document.head.appendChild(script);
+			});
+		}
+
+		loadScript("Canvas/setupCanvas.js").then(() => {
+			const scale = Math.min(canvasElementHTML.width, canvasElementHTML.height) / 1024;
+			context.textAlign = "center";
+			context.textBaseline = "middle";
+
+			const drawInitialContent = () => {
+				context.fillStyle = "white";
+				context.font = `bold ${95 * scale}px monospace`;
+				context.fillText("Click to Start... :3", canvasElementHTML.width * 0.5, canvasElementHTML.height * 0.5);
+			}
+
+			drawInitialContent();
+			canvasElementHTML.addEventListener("click", () => {
+				context.fillStyle = "black";
+				context.fillRect(0, 0, canvasElementHTML.width, canvasElementHTML.height);
+
+				context.fillStyle = "purple";
+				context.font = `bold ${75 * scale}px monospace`;
+				context.fillText("Loading... (takes multiple minutes)", canvasElementHTML.width * 0.5, canvasElementHTML.height * 0.5);
+
+				const scriptRunGame = document.createElement("script");
+				scriptRunGame.type = "module";
+				scriptRunGame.src = "Game/runGame.js";
+				document.body.appendChild(scriptRunGame);
+			}, { once: true });
+		});
+	</script>
+</body>
+
+</html>
