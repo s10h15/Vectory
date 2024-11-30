@@ -1,0 +1,40 @@
+body {
+	background-color: rgb(35, 0, 35);
+	color: rgb(200, 200, 200);
+
+	font-family: Arial;
+	font-weight: bold;
+	text-stroke-width: 10px;
+	text-stroke-color: red;
+	text-shadow: -0.65px -0.65px 0 white;
+}
+
+.inputField {
+    background-color: black;
+    color: white;
+    font-family: monospace;
+    border: none;
+    outline: none;
+    padding: 10px;
+    width: 95%;
+    box-sizing: border-box;
+    font-size: 12px;
+    transform: translateY(30px);
+    white-space: nowrap; /* prevent text wrapping */
+    overflow-x: auto; /* enable horizontal scrolling */
+    direction: ltr; /* scroll from left to right (optional) */
+}
+
+.inputContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+* {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
